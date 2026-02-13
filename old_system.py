@@ -29,9 +29,9 @@ def run_system_monolith():
         if opt == "1":  
             print("Current Crew List:")
             
-            for i in range(10):
-                print(n[i] + " - " + r[i]) 
-                
+            for i in range(len(n)):
+                print(f"{n[i]} - {r[i]}")
+            
         elif opt == "2":
             new_name = input("Name: ")
             new_rank = input("Rank: ")
