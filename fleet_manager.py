@@ -1,20 +1,21 @@
 ValidRanks = ["Petty Officer", "Ensign", "Lieutenant Junior Grade", "Lieutenant", "Lieutenant Commander", "Commander", "Captain", "Fleet Captain"]
 
 def init_database():
-    n = ["Picard", "Riker", "Data", "Worf", "spock"]
+    n = ["Picard", "Riker", "Data", "Worf", "Spock"]
     r = ["Captain", "Commander", "Lieutenant Commander", "Lieutenant", "Commander"]
     d = ["Command", "Command", "Operations", "Security", "Science"]
     id_ = ["SP-937-215", "SC-231-427", "none", "none", "S179-276SP"]
     return n, r, d, id_
+    
 
 
-def display_menu():
+def display_menu(names, ranks):
     user = input("input user's full name: ")
-    for i in range(len(n)):
-        print(f"{n[i]} - {r[i]}"))
+    for i in range(len(names)):
+        print(f"{names[i]} - {ranks[i]}")
     
     print("current student logged in: ", user )
-    choice = input("choose an option")
+    choice = input("Choose an option: ")
     return choice
 
 
@@ -59,22 +60,32 @@ def display_roster(names, ranks, divs, ids):
 
 def search_crew(names, ranks, divs, ids):
     term = input("Provide search term: ")
+    found = False
+
     if term in names:
-        for term in names:
-            idx = names.index(term)
-            print(idx)
+        idx = names.index(term)
+        print(names[idx], ranks[idx], divs[idx], ids[idx])
+        found = True
+
     elif term in ranks:
-        for term in ranks:
-            idx = ranks.index(term)
-            print(idx)
+        for i in range(len(ranks)):
+            if ranks[i] == term:
+                print(names[i], ranks[i], divs[i], ids[i])
+                found = True
+
     elif term in divs:
-        for term in divs:
-            idx = divs.index(term)
+        for i in range(len(divs)):
+            if divs[i] == term:
+                print(names[i], ranks[i], divs[i], ids[i])
+                found = True
+
     elif term in ids:
-        for term in ids:
-            idx = ids.index(term)
-    else:
-        print("Search term not found in crew ")
+        idx = ids.index(term)
+        print(names[idx], ranks[idx], divs[idx], ids[idx])
+        found = True
+
+    if not found:
+        print("No matching crew member found")
 
 def filter_by_division(names, divs):
     division = input("Choose either Command, Operations or Sciences: ")
@@ -121,20 +132,20 @@ def count_officers(ranks):
             pass
 
 def main():
-    choice = int(input("Press 1 to display menu\n" \
-    "Press 2 to add member\n" \
-    "Press 3 to remove member\n"
-    "Press 4 to update a user's rank\n " \
-    "Press 5 to display the current roster\n " \
-    "Press 6 to search crew\n " \
-    "Press 7 to Filter crew by division" \
-    "\n Press 8 to calculate current crew's payroll" \
-    "\n Press 9 to Count the amount of officers "))
-    
-    init_database()
+    n, r, d, id_ = init_database()
+    choice = int(input("Press 1 to display menu:\n" \
+    "Press 2 to add member:\n" \
+    "Press 3 to remove member:\n"
+    "Press 4 to update a user's rank:\n" \
+    "Press 5 to display the current roster:\n" \
+    "Press 6 to search crew:\n" \
+    "Press 7 to Filter crew by division:" \
+    "\nPress 8 to calculate current crew's payroll:" \
+    "\nPress 9 to Count the amount of officers:\n"
+    "Press 0 to quit: "))
     
     if choice == 1:
-        display_menu()
+        display_menu(n, r)
     elif choice == 2:
         add_member(n, r, d, id_)
     elif choice == 3:
@@ -151,11 +162,16 @@ def main():
         calculate_payroll(r)
     elif choice == 9:    
         count_officers(r)
+    elif choice == 0:
+        n = 1
     else:
         print("number doesn't correspond to options provided.")
-    
-main()
+    return n
 
+while True:
+    if main() == 1:
+        break
+    main()
 
 
 
