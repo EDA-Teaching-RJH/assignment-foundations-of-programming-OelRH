@@ -106,7 +106,7 @@ def calculate_payroll(ranks):
             pass
     print("Total cost of Crew: ",credit )
 
-def count_officer(ranks):
+def count_officers(ranks):
     count = 0
     for rank in ranks:
         if rank == "Commander":
@@ -120,6 +120,41 @@ def count_officer(ranks):
         else:
             pass
 
+def main():
+    choice = int(input("Press 1 to display menu\n" \
+    "Press 2 to add member\n" \
+    "Press 3 to remove member\n"
+    "Press 4 to update a user's rank\n " \
+    "Press 5 to display the current roster\n " \
+    "Press 6 to search crew\n " \
+    "Press 7 to Filter crew by division" \
+    "\n Press 8 to calculate current crew's payroll" \
+    "\n Press 9 to Count the amount of officers "))
+    
+    init_database()
+    
+    if choice == 1:
+        display_menu()
+    elif choice == 2:
+        add_member(n, r, d, id_)
+    elif choice == 3:
+        remove_member(n, r, d, id_)
+    elif choice == 4:
+        update_rank(r, id_)
+    elif choice == 5:
+        display_roster(n, r, d, id_)
+    elif choice == 6:   
+        search_crew(n, r, d, id_)
+    elif choice == 7:    
+        filter_by_division(n, d)
+    elif choice == 8:   
+        calculate_payroll(r)
+    elif choice == 9:    
+        count_officers(r)
+    else:
+        print("number doesn't correspond to options provided.")
+    
+main()
 
 
 
