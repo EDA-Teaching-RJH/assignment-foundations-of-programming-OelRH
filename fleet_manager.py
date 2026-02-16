@@ -91,7 +91,7 @@ def filter_by_division(names, divs):
     division = input("Choose either Command, Operations or Sciences: ")
     for _ in divs:
         if division in divs:
-            idx = div.index(division)
+            idx = divs.index(division)
             print(names[idx] )
 
 def calculate_payroll(ranks):
