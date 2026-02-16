@@ -130,7 +130,7 @@ def count_officers(ranks):
             count += 1
         else:
             pass
-
+        print(count)
 def main():
     n, r, d, id_ = init_database()
     choice = int(input("Press 1 to display menu:\n" \
